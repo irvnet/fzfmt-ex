@@ -1,3 +1,5 @@
+use std::env;
+
 enum FileSize {
     Bytes(u64),
     Kilobytes(f64),
@@ -23,6 +25,17 @@ fn format_size(size: u64) -> String {
 
 
 fn main() {
+
+    // grab the first arg after the binary name
+    let args: Vec<String> = env::args().collect();
+    println!("args: {:?}",args[1]);
+
+    if args.len() > 2 {
+        println!("too many args...");
+        return;
+    }
+
+
     let result = format_size(6888837399);
     println!("{}", result)
 }
