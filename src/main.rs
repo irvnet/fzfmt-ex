@@ -28,12 +28,20 @@ fn main() {
 
     // grab the first arg after the binary name
     let args: Vec<String> = env::args().collect();
-    println!("args: {:?}",args[1]);
-
     if args.len() > 2 {
         println!("too many args...");
         return;
     }
+
+    //split the arg into size and specifer: (./fsfmt '24 mb')
+    let arg_str = &args[1];
+    let items: Vec<&str> = arg_str.split_whitespace().collect();
+
+    //parse input
+    let size: u32 = items[0].trim().parse().expect("Wanted a number");
+    let desc: String = items[1].trim().parse().expect("Expected" );
+    println!("items: {:?} {:?}",&items[0], &items[1]);
+
 
 
     let result = format_size(6888837399);
