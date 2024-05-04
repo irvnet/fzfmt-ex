@@ -10,8 +10,16 @@ struct Sizes {
 
 impl Sizes {
 
-    fn reset(&self) {
-      println!("resetting..."); 
+    fn new() -> Sizes {
+
+       let n: Sizes = Sizes {
+            Bytes:     0,
+            Kilobytes: 0,
+            Megabytes: 0,
+            Gigabytes: 0,
+        };
+
+        n
     }
 
 
@@ -42,12 +50,8 @@ fn format_all_sizes(s: u64, u: String) -> Sizes {
     // convert to value to match the required measurement
     
     // convert/udpate the remaining measuerments
-    let mut s: Sizes = Sizes {
-         Bytes:     0,
-         Kilobytes: 0,
-         Megabytes: s,
-         Gigabytes: 0,
-    };
+    let mut s: Sizes = Sizes::new();
+
 
     //return sizes struct
     s
