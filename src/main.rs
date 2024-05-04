@@ -49,10 +49,6 @@ fn format_all_sizes(s: u64, u: String) -> Sizes {
         }
     }
 
-    // convert to value to match the required measurement
-    
-    // convert/udpate the remaining measuerments
-
     //return sizes struct
     s
 }
@@ -100,7 +96,8 @@ fn main() {
    // create new sizes struct instance
    let mut file_sizes: Sizes = Sizes::new();
 
-   //update the size as megabytes
+   //update the size as megabytes for now... 
+   //later check match on the unit type and call the set method for the proper unit
    todo!("add: 's.set_megabytes(mb_input);' ");
 
    // convert from mb to "everything else"
@@ -109,8 +106,8 @@ fn main() {
    // print results
    todo!("add: 'println(s);' ");
 
-
-    let sz = format_all_sizes(size_u64, desc);
-    println!("{:?}", sz);
+   //todo!("moving this to impl for Sizes struct");
+   //let sz = format_all_sizes(size_u64, desc);
+   //println!("{:?}", sz);
 
 }
