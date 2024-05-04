@@ -1,5 +1,14 @@
 use std::env;
 
+#[derive(Debug)]
+struct Sizes {
+  Bytes: u64,
+  Kilobytes: u64,
+  Megabytes: u64,
+  Gigabytes: u64,
+}
+
+#[derive(Debug)]
 enum FileSize {
     Bytes(u64),
     Kilobytes(f64),
@@ -23,6 +32,18 @@ fn format_size(size: u64) -> String {
     }
 }
 
+fn format_all_sizes() -> Sizes {
+
+    let mut s: Sizes = Sizes {
+         Bytes: 42,
+         Kilobytes: 42,
+         Megabytes: 42,
+         Gigabytes: 42,
+    };
+
+    //return sizes struct
+    s
+}
 
 fn main() {
 
@@ -42,8 +63,10 @@ fn main() {
     let desc: String = items[1].trim().parse().expect("Expected" );
     println!("items: {:?} {:?}",&items[0], &items[1]);
 
+    //let result = format_size(6888837399);
+    //println!("{}", result);
 
+    let sz = format_all_sizes();
+    println!("{:?}", sz);
 
-    let result = format_size(6888837399);
-    println!("{}", result)
 }
