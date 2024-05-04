@@ -11,7 +11,6 @@ struct Sizes {
 impl Sizes {
 
     fn new() -> Sizes {
-
        let n: Sizes = Sizes {
             Bytes:     0,
             Kilobytes: 0,
@@ -37,6 +36,9 @@ enum FileSize {
 
 fn format_all_sizes(s: u64, u: String) -> Sizes {
 
+    let mut s: Sizes = Sizes::new();
+    println!("new sizes struct: {:?}",s);
+
     // match the string with a measurement
     match &u as &str {
         "mb" => println!("megabytes"),
@@ -50,8 +52,6 @@ fn format_all_sizes(s: u64, u: String) -> Sizes {
     // convert to value to match the required measurement
     
     // convert/udpate the remaining measuerments
-    let mut s: Sizes = Sizes::new();
-
 
     //return sizes struct
     s
@@ -96,6 +96,8 @@ fn main() {
 
     //let result = format_size(6888837399);
     //println!("{}", result);
+
+   let mut file_sizes: Sizes = Sizes::new();
 
     let sz = format_all_sizes(size_u64, desc);
     println!("{:?}", sz);
