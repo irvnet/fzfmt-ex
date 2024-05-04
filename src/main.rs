@@ -16,6 +16,22 @@ enum FileSize {
     Gigabytes(f64),
 }
 
+fn format_all_sizes(s: u64, d: String) -> Sizes {
+
+    
+
+    let mut s: Sizes = Sizes {
+         Bytes: s,
+         Kilobytes: s,
+         Megabytes: s,
+         Gigabytes: s,
+    };
+
+    //return sizes struct
+    s
+}
+
+
 fn format_size(size: u64) -> String {
     let filesize = match size {
         0..=999 => FileSize::Bytes(size),
@@ -32,18 +48,6 @@ fn format_size(size: u64) -> String {
     }
 }
 
-fn format_all_sizes() -> Sizes {
-
-    let mut s: Sizes = Sizes {
-         Bytes: 42,
-         Kilobytes: 42,
-         Megabytes: 42,
-         Gigabytes: 42,
-    };
-
-    //return sizes struct
-    s
-}
 
 fn main() {
 
@@ -59,14 +63,15 @@ fn main() {
     let items: Vec<&str> = arg_str.split_whitespace().collect();
 
     //parse input
-    let size: u32 = items[0].trim().parse().expect("Wanted a number");
+    let size_u32: u32 = items[0].trim().parse().expect("Wanted a number");
+    let size_u64: u64 = size_u32 as u64;
     let desc: String = items[1].trim().parse().expect("Expected" );
     println!("items: {:?} {:?}",&items[0], &items[1]);
 
     //let result = format_size(6888837399);
     //println!("{}", result);
 
-    let sz = format_all_sizes();
+    let sz = format_all_sizes(size_u64, desc);
     println!("{:?}", sz);
 
 }
