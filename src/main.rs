@@ -8,6 +8,17 @@ struct Sizes {
   Gigabytes: u64,
 }
 
+impl Sizes {
+
+    fn reset(&self) {
+      println!("resetting..."); 
+    }
+
+
+}
+
+
+
 #[derive(Debug)]
 enum FileSize {
     Bytes(u64),
@@ -16,15 +27,26 @@ enum FileSize {
     Gigabytes(f64),
 }
 
-fn format_all_sizes(s: u64, d: String) -> Sizes {
+fn format_all_sizes(s: u64, u: String) -> Sizes {
 
+    // match the string with a measurement
+    match &u as &str {
+        "mb" => println!("megabytes"),
+        _    => {
+            // only accept megabytes as input (otherwise exit)
+            println!("unrecognized unit...use 'mb' for megabytes please... ");
+            std::process::exit(1);
+        }
+    }
+
+    // convert to value to match the required measurement
     
-
+    // convert/udpate the remaining measuerments
     let mut s: Sizes = Sizes {
-         Bytes: s,
-         Kilobytes: s,
+         Bytes:     0,
+         Kilobytes: 0,
          Megabytes: s,
-         Gigabytes: s,
+         Gigabytes: 0,
     };
 
     //return sizes struct
