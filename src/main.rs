@@ -97,7 +97,18 @@ fn main() {
     //let result = format_size(6888837399);
     //println!("{}", result);
 
+   // create new sizes struct instance
    let mut file_sizes: Sizes = Sizes::new();
+
+   //update the size as megabytes
+   todo!("add: 's.set_megabytes(mb_input);' ");
+
+   // convert from mb to "everything else"
+   todo!("add: 's.update_all_sizes();' ");
+
+   // print results
+   todo!("add: 'println(s);' ");
+
 
     let sz = format_all_sizes(size_u64, desc);
     println!("{:?}", sz);
