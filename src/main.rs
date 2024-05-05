@@ -18,23 +18,34 @@ impl Sizes {
             Gigabytes: 0,
         };
 
+        // return new Sizes struct
         n
     }
-    fn set_bytes(&mut self, s:u64) {
-        self.Bytes = s;
+
+    fn new_sizes_from_mb(s: u64, u: String) -> Sizes {
+
+        let mut s: Sizes = Sizes::new();
+        println!("new sizes struct: {:?}",s);
+    
+        // match the string with a measurement
+        match &u as &str {
+            "mb" => println!("megabytes"),
+            _    => {
+                // only accept megabytes as input (otherwise exit)
+                println!("unrecognized unit...use 'mb' for megabytes please... ");
+                std::process::exit(1);
+            }
+        }
+    
+        //return sizes struct
+        s
     }
 
-    fn set_kilobytes(&mut self, s:u64) {
-        self.Kilobytes = s;
-    }
     
     fn set_megabytes(&mut self, s:u64) {
         self.Megabytes = s;
     }
 
-    fn set_gigabytes(&mut self, s:u64) {
-        self.Gigabytes = s;
-    }
 
     fn cvt_mb2gb(&mut self) {
         let gb = self.Megabytes as f64 / (1024.0 * 1024.0); 
