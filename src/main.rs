@@ -24,7 +24,7 @@ impl Sizes {
 
     fn new_sizes_from_mb(s: u64, u: String) -> Sizes {
 
-        let mut s: Sizes = Sizes::new();
+        let s: Sizes = Sizes::new();
         println!("new sizes struct: {:?}",s);
     
         // match the string with a measurement
@@ -62,25 +62,6 @@ enum FileSize {
     Kilobytes(f64),
     Megabytes(f64),
     Gigabytes(f64),
-}
-
-fn format_all_sizes(s: u64, u: String) -> Sizes {
-
-    let mut s: Sizes = Sizes::new();
-    println!("new sizes struct: {:?}",s);
-
-    // match the string with a measurement
-    match &u as &str {
-        "mb" => println!("megabytes"),
-        _    => {
-            // only accept megabytes as input (otherwise exit)
-            println!("unrecognized unit...use 'mb' for megabytes please... ");
-            std::process::exit(1);
-        }
-    }
-
-    //return sizes struct
-    s
 }
 
 
@@ -127,19 +108,8 @@ fn main() {
    //println!("{}", result);
 
    // create new sizes struct instance
-   let mut file_sizes: Sizes = Sizes::new();
-   file_sizes.set_megabytes(size_u64);
+   let file_sizes: Sizes = Sizes::new_sizes_from_mb(size_u64, desc);
    println!("updated MB as: {:?}",file_sizes);
 
-
-   // convert from mb to "everything else"
-   //todo!("add: 's.update_all_sizes();' ");
-
-   // print results
-   //todo!("add: 'println(s);' ");
-
-   //todo!("moving this to impl for Sizes struct");
-   let sz = format_all_sizes(size_u64, desc);
-   println!("{:?}", sz);
 
 }
