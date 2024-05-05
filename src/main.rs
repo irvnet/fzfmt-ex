@@ -29,14 +29,23 @@ impl Sizes {
     
         // match the string with a measurement
         match &u as &str {
-            "mb" => println!("megabytes"),
+              "b"  => s.Bytes = s.Bytes + s,
+           // "kb" => println!("kilobytes"),
+              "mb" => {
+                 println!("megabytes");
+                 s.Megabytes = s.Megabytes + s; 
+              } 
+           // "gb" => println!("gigabytes"),
             _    => {
                 // only accept megabytes as input (otherwise exit)
-                println!("unrecognized unit...use 'mb' for megabytes please... ");
+                println!("unrecognized unit...");
                 std::process::exit(1);
             }
         }
     
+
+
+
         //return sizes struct
         s
     }
@@ -79,8 +88,8 @@ fn main() {
         println!("too many args...");
         return;
     } else if args.len() < 2 {
-        println!("not enough args...setting default as '23 mb'");
-        args.push("40000 mb".to_string());
+        println!("not enough args...setting default as '70000 mb'");
+        args.push("70000 mb".to_string());
     }
 
    //split the arg into size and specifer: (./fsfmt '24 mb')
@@ -91,14 +100,16 @@ fn main() {
    let size_u32: u32 = items[0].trim().parse().expect("Wanted a number");
    let size_u64: u64 = size_u32 as u64;
    let desc: String = items[1].trim().parse().expect("Expected" );
-   println!("items: {:?} {:?}",&items[0], &items[1]);
+   //println!("items: {:?} {:?}",&items[0], &items[1]);
     
-   //let result = format_size(6888837399);
-   //println!("{}", result);
-
    // create new sizes struct instance
    let file_sizes: Sizes = Sizes::new_sizes_from_mb(size_u64, desc);
    println!("updated MB as: {:?}",file_sizes);
 
 
+
+
+
+      //let result = format_size(6888837399);
+   //println!("{}", result);
 }
