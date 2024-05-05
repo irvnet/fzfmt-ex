@@ -22,18 +22,18 @@ impl Sizes {
         n
     }
 
-    fn new_sizes_from_mb(s: u64, u: String) -> Sizes {
+    fn new_sizes_from_mb(size_arg: u64, u: String) -> Sizes {
 
-        let s: Sizes = Sizes::new();
+        let mut s: Sizes = Sizes::new();
         println!("new sizes struct: {:?}",s);
     
         // match the string with a measurement
         match &u as &str {
-              "b"  => s.Bytes = s.Bytes + s,
+              "b"  => s.Bytes = size_arg,
            // "kb" => println!("kilobytes"),
               "mb" => {
                  println!("megabytes");
-                 s.Megabytes = s.Megabytes + s; 
+                 //s.Megabytes = s.Megabytes + size_arg; 
               } 
            // "gb" => println!("gigabytes"),
             _    => {
