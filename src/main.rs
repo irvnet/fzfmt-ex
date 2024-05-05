@@ -20,15 +20,26 @@ impl Sizes {
 
         n
     }
+    fn set_bytes(&mut self, s:u64) {
+        self.Bytes = s;
+    }
 
+    fn set_kilobytes(&mut self, s:u64) {
+        self.Kilobytes = s;
+    }
+    
     fn set_megabytes(&mut self, s:u64) {
         self.Megabytes = s;
     }
 
-    fn cvt_mb2gb(&mut self) {
-        self.Gigabytes = self.Megabytes / 1024;
+    fn set_gigabytes(&mut self, s:u64) {
+        self.Gigabytes = s;
     }
 
+    fn cvt_mb2gb(&mut self) {
+        let gb = self.Megabytes as f64 / (1024.0 * 1024.0); 
+        self.Gigabytes = gb as u64;
+    }
 
 }
 
@@ -87,9 +98,8 @@ fn main() {
         println!("too many args...");
         return;
     } else if args.len() < 2 {
-        println!("not enough args...");
-        args.push("23 mb".to_string());
-        return;
+        println!("not enough args...setting default as '23 mb'");
+        args.push("40000 mb".to_string());
     }
 
    //split the arg into size and specifer: (./fsfmt '24 mb')
@@ -102,25 +112,14 @@ fn main() {
    let desc: String = items[1].trim().parse().expect("Expected" );
    println!("items: {:?} {:?}",&items[0], &items[1]);
     
-
-
-    //let result = format_size(6888837399);
-    //println!("{}", result);
+   //let result = format_size(6888837399);
+   //println!("{}", result);
 
    // create new sizes struct instance
    let mut file_sizes: Sizes = Sizes::new();
    file_sizes.set_megabytes(size_u64);
    println!("updated MB as: {:?}",file_sizes);
 
-   // update the remaining units from size in megabytes
-   file_sizes.cvt_mb2gb();
-   println!("updated GB as: {:?}",file_sizes);
-   //file_sizes.cvt_mb2kb();
-   //file_sizes.cvt_mb2b();
-
-   //update the size as megabytes for now... 
-   //later check match on the unit type and call the set method for the proper unit
-   //todo!("add: 's.set_megabytes(mb_input);' ");
 
    // convert from mb to "everything else"
    //todo!("add: 's.update_all_sizes();' ");
