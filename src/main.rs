@@ -21,6 +21,14 @@ impl Sizes {
         n
     }
 
+    fn set_megabytes(&mut self, s:u64) {
+        self.Megabytes = s;
+    }
+
+    fn cvt_mb2gb(&mut self) {
+        self.Gigabytes = self.Megabytes / 1024;
+    }
+
 
 }
 
@@ -74,40 +82,54 @@ fn format_size(size: u64) -> String {
 fn main() {
 
     // grab the first arg after the binary name
-    let args: Vec<String> = env::args().collect();
+    let mut args: Vec<String> = env::args().collect();
     if args.len() > 2 {
         println!("too many args...");
         return;
+    } else if args.len() < 2 {
+        println!("not enough args...");
+        args.push("23 mb".to_string());
+        return;
     }
 
-    //split the arg into size and specifer: (./fsfmt '24 mb')
-    let arg_str = &args[1];
-    let items: Vec<&str> = arg_str.split_whitespace().collect();
+   //split the arg into size and specifer: (./fsfmt '24 mb')
+   let arg_str = &args[1];
+   let items: Vec<&str> = arg_str.split_whitespace().collect();
 
-    //parse input
-    let size_u32: u32 = items[0].trim().parse().expect("Wanted a number");
-    let size_u64: u64 = size_u32 as u64;
-    let desc: String = items[1].trim().parse().expect("Expected" );
-    println!("items: {:?} {:?}",&items[0], &items[1]);
+   //parse input
+   let size_u32: u32 = items[0].trim().parse().expect("Wanted a number");
+   let size_u64: u64 = size_u32 as u64;
+   let desc: String = items[1].trim().parse().expect("Expected" );
+   println!("items: {:?} {:?}",&items[0], &items[1]);
+    
+
 
     //let result = format_size(6888837399);
     //println!("{}", result);
 
    // create new sizes struct instance
    let mut file_sizes: Sizes = Sizes::new();
+   file_sizes.set_megabytes(size_u64);
+   println!("updated MB as: {:?}",file_sizes);
+
+   // update the remaining units from size in megabytes
+   file_sizes.cvt_mb2gb();
+   println!("updated GB as: {:?}",file_sizes);
+   //file_sizes.cvt_mb2kb();
+   //file_sizes.cvt_mb2b();
 
    //update the size as megabytes for now... 
    //later check match on the unit type and call the set method for the proper unit
-   todo!("add: 's.set_megabytes(mb_input);' ");
+   //todo!("add: 's.set_megabytes(mb_input);' ");
 
    // convert from mb to "everything else"
-   todo!("add: 's.update_all_sizes();' ");
+   //todo!("add: 's.update_all_sizes();' ");
 
    // print results
-   todo!("add: 'println(s);' ");
+   //todo!("add: 'println(s);' ");
 
    //todo!("moving this to impl for Sizes struct");
-   //let sz = format_all_sizes(size_u64, desc);
-   //println!("{:?}", sz);
+   let sz = format_all_sizes(size_u64, desc);
+   println!("{:?}", sz);
 
 }
