@@ -42,9 +42,9 @@ impl Sizes {
     }
 
     
-    fn set_megabytes(&mut self, s:u64) {
-        self.Megabytes = s;
-    }
+    // fn set_megabytes(&mut self, s:u64) {
+    //     self.Megabytes = s;
+    // }
 
 
     fn cvt_mb2gb(&mut self) {
