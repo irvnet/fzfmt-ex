@@ -41,11 +41,6 @@ impl Sizes {
         s
     }
 
-    
-    // fn set_megabytes(&mut self, s:u64) {
-    //     self.Megabytes = s;
-    // }
-
 
     fn cvt_mb2gb(&mut self) {
         let gb = self.Megabytes as f64 / (1024.0 * 1024.0); 
