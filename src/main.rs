@@ -36,18 +36,23 @@ impl Sizes {
 
               "kb" => {
                 s.Kilobytes = size_arg;
-                s.Bytes     = s.Kilobytes * 1024;   // cvt: kb -> b
-                s.Megabytes = s.Kilobytes / 1024;   // cvt: kb -> mb 
-                s.Gigabytes = s.Kilobytes / 1048576;    // cvt: kb -> gb 
+                s.Bytes     = s.Kilobytes * 1024;    // cvt: kb -> b
+                s.Megabytes = s.Kilobytes / 1024;    // cvt: kb -> mb 
+                s.Gigabytes = s.Kilobytes / 1048576; // cvt: kb -> gb 
               }
 
               "mb" => {
-                 println!("megabytes");
-                 s.Megabytes = s.Megabytes + size_arg; 
+                s.Megabytes = size_arg;
+                s.Bytes     = s.Megabytes * 1048576; // cvt: mb -> b
+                s.Kilobytes = s.Megabytes * 1024;    // cvt: mb -> kb 
+                s.Gigabytes = s.Megabytes / 1024;    // cvt: mb -> gb 
               } 
 
               "gb" => {
-                 println!("gigabytes");
+                s.Gigabytes = size_arg;
+                s.Bytes     = s.Gigabytes * 1073741824; // cvt: gb -> b
+                s.Kilobytes = s.Gigabytes * 1048576;    // cvt: gb -> kb 
+                s.Megabytes = s.Gigabytes * 1024;       // cvt: gb -> mb 
               }
             
               _    => {
