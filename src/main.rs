@@ -23,24 +23,37 @@ impl Sizes {
     }
 
     fn new_sizes_from_mb(size_arg: u64, u: String) -> Sizes {
-
         let mut s: Sizes = Sizes::new();
-        println!("new sizes struct: {:?}",s);
     
         // match the string with a measurement
         match &u as &str {
-              "b"  => s.Bytes = size_arg,
-           // "kb" => println!("kilobytes"),
+              "b"  => { 
+                s.Bytes = size_arg;
+                s.Kilobytes = s.Bytes / 1024;       // cvt: b -> kb 
+                s.Megabytes = s.Bytes / 1048576;    // cvt: b -> mb 
+                s.Gigabytes = s.Bytes / 1073741824; // cvt: b -> gb 
+              }
+
+              "kb" => {
+                s.Kilobytes = size_arg;
+                s.Bytes     = s.Kilobytes * 1024;   // cvt: kb -> b
+                s.Megabytes = s.Kilobytes / 1024;   // cvt: kb -> mb 
+                s.Gigabytes = s.Kilobytes / 1048576;    // cvt: kb -> gb 
+              }
+
               "mb" => {
                  println!("megabytes");
-                 //s.Megabytes = s.Megabytes + size_arg; 
+                 s.Megabytes = s.Megabytes + size_arg; 
               } 
-           // "gb" => println!("gigabytes"),
-            _    => {
-                // only accept megabytes as input (otherwise exit)
+
+              "gb" => {
+                 println!("gigabytes");
+              }
+            
+              _    => {
                 println!("unrecognized unit...");
                 std::process::exit(1);
-            }
+              }
         }
     
 
